@@ -18,8 +18,9 @@
 
 .modal-paragrafo {
     font-size: 16px;
-    color:  #ffffff; 
-    margin-left : 10px;
+    color: #ffffff;
+    margin: 0 10px 12px 10px;
+    line-height: 1.5;
 }
 
 .modal-subtitle {
@@ -68,4 +69,23 @@
   background-color: #1a754f;
   border-top: 15px;
   border-bottom: none;
+}
+
+/* versão da aplicação */
+.modal-version {
+    margin: 10px 0 18px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #f4f4f4;
+    font-weight: 500;
+}
+
+/* links do rodapé */
+.modal-footer-text a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.modal-footer-text a:hover {
+    color: #d9f2e6;
 }
