@@ -1,40 +1,58 @@
-library(ShortRead)
 library(shiny)
-library(fs)
-library(shinyFiles)
 library(shinyjs)
 library(shinyWidgets)
-library(ggplot2) 
 
-# Carregar funções prontas e módulos de servidor
 source("scripts/carrega_funcoes.R")
 source("scripts/metrics.R")
 source("server_qualidade.R")
 source("server_trimagem.R")
 
-# BACK
+apresentacao_html <- HTML(
+  paste(
+    readLines("www/apresentacao.html", encoding = "UTF-8"),
+    collapse = "\n"
+  )
+)
+
+mostrar_apresentacao <- function() {
+  showModal(
+    modalDialog(
+      title = NULL,
+      apresentacao_html,
+      size = "l",
+      easyClose = FALSE,
+      footer = actionButton(
+        "btn_iniciar",
+        "Iniciar",
+        class = "btn-primary"
+      )
+    )
+  )
+}
+
 server <- function(input, output, session) {
   
-  html_content <- HTML(paste(readLines("www/apresentacao.html",
-                                       encoding = "UTF-8"), collapse = "\n"))
+  mostrar_apresentacao()
   
-  # Cria uma tela inicial como se fosse uma caixa de dialogo
-  showModal(modalDialog(title = NULL,
-                        html_content,
-                        size = "l",
-                        easyClose = TRUE,
-                        footer = modalButton("Iniciar")))
+  observeEvent(input$btn_iniciar, {
+    removeModal()
+  })
   
-  
-  # O módulo de qualidade recebe o ID e as referências às variáveis de estado
+  # Diretório selecionado pelo usuário
   r_dir_path <- reactiveVal(NULL)
+  
+  # Resultado da análise de qualidade compartilhado entre módulos
   r_resultado_qa <- reactiveVal(NULL)
+  
   qualidadeServer("qualidade_id", r_dir_path, r_resultado_qa)
   
-  # O módulo de trimagem é independente
   trimagemServer("trimagem_id")
   
   observeEvent(input$mode, {
-    toggleCssClass(id = "page", class = "dark-mode")
+    if (identical(input$mode, "dark")) {
+      addCssClass(id = "page", class = "dark-mode")
+    } else {
+      removeCssClass(id = "page", class = "dark-mode")
+    }
   })
 }
