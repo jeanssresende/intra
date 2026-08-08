@@ -81,3 +81,13 @@ table {
   padding-left: 0;
   padding-right: 0;
 }
+
+.titulo-app {
+  margin-right: 60px;
+}
+
+@media (max-width: 768px) {
+  .titulo-app {
+    margin-right: 0;
+  }
+}
