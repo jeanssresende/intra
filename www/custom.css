@@ -91,3 +91,46 @@ table {
     margin-right: 0;
   }
 }
+
+/* Logo da barra superior */
+#logo-fixo {
+  height: 58px;
+  width: auto;
+  margin-right: 12px;
+}
+
+/* Título ao lado do logo */
+.titulo-app {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: white !important;
+  white-space: nowrap;
+}
+
+/* Barra superior */
+.navbar {
+  min-height: 72px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+/* Links da navbar */
+.navbar-nav .nav-link {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  #logo-fixo {
+    height: 46px;
+  }
+
+  .titulo-app {
+    font-size: 1.2rem;
+    gap: 8px;
+  }
+}
